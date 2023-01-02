@@ -418,8 +418,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fb7c28e9cc5be34eb0349e47c614793, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemy: {fileID: 779195522842874775, guid: 252885c7f8ad7e642a69d6c7882d57d5, type: 3}
-  _timeBetweenIterations: 2
+  _enemy: {fileID: -3076058990299762557, guid: 252885c7f8ad7e642a69d6c7882d57d5, type: 3}
+  _delay: 2
 --- !u!1 &1273959379
 GameObject:
   m_ObjectHideFlags: 0

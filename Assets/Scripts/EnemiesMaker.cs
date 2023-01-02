@@ -5,19 +5,18 @@ using UnityEngine;
 
 public class EnemiesMaker : MonoBehaviour
 {
-    [SerializeField] private GameObject _enemy;
-    [SerializeField] private float _timeBetweenIterations;
+    [SerializeField] private Enemy _enemy;
+    [SerializeField] private float _delay;
     
     private const float MinTimeBetweenIterations = 0.1f;
 
     private List<Transform> _points;
-    private bool _isCoroutineStarted = false;
 
     private void OnValidate()
     {
-        if (_timeBetweenIterations < MinTimeBetweenIterations)
+        if (_delay < MinTimeBetweenIterations)
         {
-            _timeBetweenIterations = MinTimeBetweenIterations;
+            _delay = MinTimeBetweenIterations;
         }
     }
 
@@ -25,16 +24,12 @@ public class EnemiesMaker : MonoBehaviour
     {
         _points = GetComponentsInChildren<Transform>().ToList();
 
-        if (_isCoroutineStarted == false)
-        {
-            StartCoroutine(CreateEnemies());
-            _isCoroutineStarted = true;
-        }
+        StartCoroutine(Create());
     }
 
-    private IEnumerator CreateEnemies()
+    private IEnumerator Create()
     {
-        var waitForTwoSeconds = new WaitForSeconds(_timeBetweenIterations);
+        var wait = new WaitForSeconds(_delay);
         
         while (_points.Count > 0)
         {
@@ -42,9 +37,7 @@ public class EnemiesMaker : MonoBehaviour
             Instantiate(_enemy, _points[randomNumber], false);
             
             _points.RemoveAt(randomNumber);
-            yield return waitForTwoSeconds;
+            yield return wait;
         }
-
-        _isCoroutineStarted = false;
     }
 }
